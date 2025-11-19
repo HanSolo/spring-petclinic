@@ -1,0 +1,60 @@
+---
+name: Java CI
+
+on: [push]
+
+jobs:
+  CRaC5:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '21'
+          java-package: jdk+crac
+          architecture: x64
+
+      - run: java -version
+
+      - uses: actions/checkout@v3
+      - name: Grant execute permission for gradlew
+        run: chmod +x ./gradlew
+      - name: Build with Gradle
+        run: ./gradlew build
+      - name: Create folder for checkpoint
+        run: mkdir -p /tmp_auto_checkpoint
+
+      - name: Run petclinic with automatic checkpoint
+        run: sh start-auto-crac.sh
+
+      - uses: actions/upload-artifact@main
+        with:
+          name: *
+          path: /tmp_auto_checkpoint
+
+
+    steps:
+      - uses: actions/checkout@main
+
+      - uses: actions/download-artifact@main
+        with:
+          name: *
+          path: /tmp_auto_checkpoint
+
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag petclinic
+
+      - name: Run Docker container
+        run: docker run --privileged -t --rm --name petclinic petclinic /bin/bash -c 'java -XX:CRaCCheckpointTo=/opt/crac-files -jar /opt/app/spring-petclinic-3.2.0.jar'
+
+      #- name: Publish to docker hub
+      #  uses: docker/build-push-action@v1
+      #  with:
+      #    username: ${{ secrets.DOCKER_HUB_USERNAME }}
+      #    password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+      #    repository: hansolo/crac5
+      #    tags: ${{github.run_number}}
+      #    tags: latest
+
+...
