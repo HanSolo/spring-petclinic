@@ -19,13 +19,13 @@
 
 5. Make sure you have the dependency to org.crac added to your build file
 - gradle: <br>
-```implementation 'org.crac:crac:1.4.0'```
+```implementation 'org.crac:crac:1.5.0'```
 - maven :
 ```
 <dependency>
   <groupId>org.crac</groupId>
   <artifactId>crac</artifactId>
-  <version>1.4.0</version>
+  <version>1.5.0</version>
 </dependency>  
 ```
 
@@ -34,7 +34,7 @@
 #### Build the application
 1. Open the project folder
 2. run ```gradlew clean build```
-3. Now you should find the the jar at ```build/libs/spring-petclinic-3.2.0.jar```
+3. Now you should find the the jar at ```build/libs/spring-petclinic-3.3.0.jar```
 4. Create a folder named ```tmp_auto_checkpoint``` in the project folder (besides the ```src``` folder)
 5. Create a folder named ```tmp_manual_checkpoint``` in the project folder (besides the ```src``` folder)
 
@@ -43,18 +43,6 @@
 #### Start the application without any CRaC
 1. Start the application normally
 ```bash start.sh```
-
-<br>
-
-#### Info:
-A checkpoint can also be compressed (only in Azul Zulu) on the hard drive by executing
-```export CRAC_CRIU_OPTS=--compress```
-It is already in the two shell scripts for starting up the app with the different options
-- start-auto-crac.sh
-- start-manual-crac.sh
-So you simply have to un-comment it in these shell scripts.
-Be aware that the compression at checkpoint and decompression at restoring will take longer.
-Meaning to say the restore will be slower when using a compressed checkpoint (on my machine used here it takes around 150ms to de-compress the checkpoint)
 
 <br>
 
@@ -82,7 +70,7 @@ Meaning to say the restore will be slower when using a compressed checkpoint (on
 There are two ways of creating the checkpoint manually, calling the application jar or the pid
 
 1. Calling the application jar
-```jcmd spring-petclinic-3.2.0.jar JDK.checkpoint```
+```jcmd spring-petclinic-3.3.0.jar JDK.checkpoint```
 
 or 
 

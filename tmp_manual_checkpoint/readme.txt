@@ -1,1 +1,0 @@
-This folder will contain the files of the manual checkpoint

@@ -24,39 +24,40 @@ import org.springframework.context.event.EventListener;
 
 import java.time.Instant;
 
+
 /**
  * PetClinic Spring Boot Application.
  *
  * @author Dave Syer
- *
  */
 @SpringBootApplication
 @ImportRuntimeHints(PetClinicRuntimeHints.class)
 public class PetClinicApplication {
-
 	private static long startTime;
 	private static long endTime;
 	private static long pid;
 
+
 	public static void main(String[] args) {
-		startTime = System.nanoTime();
+		startTime = Instant.now().toEpochMilli(); // Start time in milliseconds
 		pid       = ProcessHandle.current().pid();
+
 		SpringApplication.run(PetClinicApplication.class, args);
 		if (null == System.getProperty("START_TIME")) {
-			System.out.println("Started up in " + ((endTime - startTime) / 1_000_000) + "ms with PID: " + pid);
+			System.out.println("START_TIME not set");
+			System.out.println("Started up in " + (endTime - startTime) + "ms with PID: " + pid);
 		}
 	}
 
 	@EventListener(ApplicationReadyEvent.class)
 	public void startApp() {
 		if (null != System.getProperty("START_TIME")) {
-			startTime = Long.parseLong(System.getProperty("START_TIME"));
+			startTime = Long.parseLong(System.getProperty("START_TIME")); // Start time in milliseconds from environment variable
 			endTime   = Instant.now().toEpochMilli();
 			pid       = ProcessHandle.current().pid();
 			System.out.println("Started up in " + (endTime - startTime) + "ms with PID: " + pid);
 		} else {
-			endTime = System.nanoTime();
+			endTime = Instant.now().toEpochMilli(); // End time in milliseconds
 		}
 	}
-
 }
