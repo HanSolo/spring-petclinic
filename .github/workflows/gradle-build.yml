@@ -21,7 +21,7 @@ jobs:
           java-version: '25'
           java-package: jdk+crac
           architecture: x64
-          cache: maven
+          #cache: maven
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
