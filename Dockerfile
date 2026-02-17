@@ -5,7 +5,7 @@ RUN apt-get update -y
 RUN mkdir -p /opt/crac-files
 COPY build/libs/spring-petclinic-4.0.0.jar /opt/app/spring-petclinic-4.0.0.jar
 
-RUN java -Dspring.context.checkpoint=onRefresh -XX:CRaCEngine=warp -XX:CRaCCheckpointTo=/opt/crac-files -jar /opt/app/spring-petclinic-4.0.0.jar
+RUN java -Dspring.context.checkpoint=onRefresh -XX:CRaCEngine=warp -XX:CRaCCheckpointTo=/opt/crac-files -jar /opt/app/spring-petclinic-4.0.0.jar || if [ $? -eq 137 ]; then return 0; else return 1; fi.
 
 
 # Runtime stge
