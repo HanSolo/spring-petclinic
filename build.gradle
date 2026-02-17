@@ -12,6 +12,7 @@ plugins {
 gradle.startParameter.excludedTaskNames += [ "checkFormatAot", "checkFormatAotTest" ]
 
 group = 'org.springframework.samples'
+version = '4.0.0'
 
 repositories {
   mavenCentral()
