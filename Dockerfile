@@ -1,6 +1,6 @@
 # Build stage
 FROM azul/zulu-openjdk:25-jdk-crac-latest AS builder
-LABEL authors="hansolo"
+LABEL authors="Han Solo"
 RUN apt-get update -y
 RUN mkdir -p /opt/crac-files
 COPY build/libs/spring-petclinic-4.0.0.jar /opt/app/spring-petclinic-4.0.0.jar
@@ -13,7 +13,7 @@ CMD ["/bin/bash","-c","./startup.sh"]
 
 # Runtime stge
 FROM azul/zulu-openjdk:25-jdk-crac-latest
-LABEL authors="hansolo"
+LABEL authors="Han Solo"
 RUN apt-get update -y
 RUN mkdir -p /opt/crac-files
 COPY --from=builder /opt/app/spring-petclinic-4.0.0.jar /opt/app/spring-petclinic-4.0.0.jar
