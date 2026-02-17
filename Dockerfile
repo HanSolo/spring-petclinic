@@ -9,7 +9,7 @@ RUN mkdir -p /opt/crac-files
 COPY build/libs/spring-petclinic-4.0.0.jar /opt/app/spring-petclinic-4.0.0.jar
 
 # Start PetClinic with automatic checkpoint and suppress exit code 137 to be able to continue the build
-RUN java -Dspring.context.checkpoint=onRefresh -XX:CRaCEngine=warp -XX:+ShowCPUFeatures -XX:CPUFeatures=generic -XX:CRaCCheckpointTo=/opt/crac-files -jar /opt/app/spring-petclinic-4.0.0.jar || if [ $? -eq 137 ]; then return 0; else return 1; fi
+RUN java -Dspring.context.checkpoint=onRefresh -XX:CRaCEngine=warp -XX:CPUFeatures=generic -XX:CRaCCheckpointTo=/opt/crac-files -jar /opt/app/spring-petclinic-4.0.0.jar || if [ $? -eq 137 ]; then return 0; else return 1; fi
 
 
 
