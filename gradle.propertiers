@@ -1,4 +1,5 @@
 sourceCompatibility = 25
 targetCompatibility = 25
 
-version = 25.0.0
+group = 'org.springframework.samples'
+version = 4.0.0
