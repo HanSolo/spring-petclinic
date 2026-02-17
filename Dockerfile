@@ -27,4 +27,4 @@ COPY --from=builder /opt/app/spring-petclinic-4.0.0.jar /opt/app/spring-petclini
 COPY --from=builder /opt/crac-files/core.img /opt/crac-files/core.img
 
 # Restore the petclinic from the checkpoint
-RUN java -XX:CRaCRestoreFrom=/opt/crac-files -XX:+CRaCIgnoreRestoreIfUnavailable -jar /opt/app/spring-petclinic-4.0.0.jar
+RUN java -XX:CRaCEngine=warp -XX:CRaCRestoreFrom=/opt/crac-files -XX:+CRaCIgnoreRestoreIfUnavailable -jar /opt/app/spring-petclinic-4.0.0.jar
