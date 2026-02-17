@@ -26,10 +26,7 @@ RUN mkdir -p /opt/crac-files
 COPY --from=builder /opt/app/spring-petclinic-4.0.0.jar /opt/app/spring-petclinic-4.0.0.jar
 
 # Copy the checkpoint file from the builder
-COPY --from=builder /opt/crac-files/.* /opt/crac-files
-
-# List files in checkpoint folder
-RUN ls /opt/crac-files
+COPY --from=builder /opt/crac-files/core.img /opt/crac-files/core.img
 
 # Restore the petclinic from the checkpoint
 RUN java -XX:CRaCRestoreFrom=/opt/crac-files -XX:+CRaCIgnoreRestoreIfUnavailable -jar /opt/app/spring-petclinic-4.0.0.jar
