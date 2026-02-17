@@ -5,10 +5,10 @@ RUN apt-get update -y
 RUN mkdir -p /opt/crac-files
 COPY build/libs/spring-petclinic-4.0.0.jar /opt/app/spring-petclinic-4.0.0.jar
 
-#RUN java -XX:CRaCEngine=warp -XX:CRaCCheckpointTo=/opt/crac-files -XX:CPUFeatures=ignore -jar /opt/app/crac5-25.0.0.jar
+RUN java -Dspring.context.checkpoint=onRefresh -XX:CRaCEngine=warp -XX:CRaCTraceStartupTime=true -XX:CRaCCheckpointTo=/opt/crac-files -XX:CPUFeatures=ignore -jar /opt/app/spring-petclinic-4.0.0.jar
 
-COPY startup.sh .
-CMD ["/bin/bash","-c","./startup.sh"]
+#COPY startup.sh .
+#CMD ["/bin/bash","-c","./startup.sh"]
 
 
 # Runtime stge
