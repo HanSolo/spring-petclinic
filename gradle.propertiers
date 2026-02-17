@@ -1,5 +1,8 @@
 sourceCompatibility = 25
 targetCompatibility = 25
 
+<<<<<<< HEAD
 group = 'org.springframework.samples'
+=======
+>>>>>>> 6a90ca8 (tmp)
 version = 4.0.0
