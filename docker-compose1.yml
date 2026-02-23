@@ -1,0 +1,21 @@
+# Run it:
+# docker compose build
+# docker compose up
+
+services:
+  spring-petclinic:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: spring-petclinic:4.0.0
+    container_name: spring-petclinic
+    ports:
+      - "8080:8080"
+    volumes:
+      - checkpoint-data:/opt/checkpoint
+    restart: unless-stopped
+    environment:
+      - JAVA_OPTS=-XX:CRaCEngine=warp -XX:CRaCRestoreFrom=/opt/checkpoint -XX:+CRaCIgnoreRestoreIfUnavailable
+
+volumes:
+  checkpoint-data:

@@ -28,4 +28,4 @@ COPY --from=builder /opt/checkpoint/core.img /opt/checkpoint/core.img
 
 # Restore the petclinic from the checkpoint
 RUN java -XX:CRaCEngine=warp -XX:CRaCRestoreFrom=/opt/checkpoint -XX:+CRaCIgnoreRestoreIfUnavailable -jar /opt/app/spring-petclinic-4.0.0.jar
-#ENTRYPOINT ["java","-XX:CRaCEngine=warp -XX:CRaCRestoreFrom=/opt/checkpoint -XX:+CRaCIgnoreRestoreIfUnavailable -jar", "/opt/app/spring-petclinic-4.0.0.jar" ]
+#ENTRYPOINT ["java", "-XX:CRaCEngine=warp", "-XX:CRaCRestoreFrom=/opt/checkpoint", "-XX:+CRaCIgnoreRestoreIfUnavailable", "-jar", "/opt/app/spring-petclinic-4.0.0.jar"]
